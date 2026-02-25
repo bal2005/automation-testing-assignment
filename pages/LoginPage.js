@@ -1,11 +1,9 @@
+import { usernameSelector, passwordSelector, submitButtonSelector } from "../pageobjects/loginObject";
 export class LoginPage {
   constructor(page) {
     this.page = page;
 
-    // Locators only
-    this.usernameInput = page.locator('input[name="username"]');
-    this.passwordInput = page.locator('input[name="password"]');
-    this.loginButton = page.locator('button[type="submit"]');
+   
   }
 
   async navigateToLogin() {
@@ -14,15 +12,19 @@ export class LoginPage {
     );
   }
 
+  async waitForLoginPage() {
+    await this.page.locator(usernameSelector).waitFor({ state: 'visible' });
+  }
+
   async fillUsername(username) {
-    await this.usernameInput.fill(username);
+    await this.page.locator(usernameSelector).fill(username);
   }
 
   async fillPassword(password) {
-    await this.passwordInput.fill(password);
+    await this.page.locator(passwordSelector).fill(password);
   }
 
   async clickLogin() {
-  await this.loginButton.click();
+  await this.page.locator(submitButtonSelector).click();
   }
 }

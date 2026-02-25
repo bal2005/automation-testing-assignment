@@ -1,11 +1,14 @@
+import { addButton } from "../pageobjects/pimObject";
 export class PIM{
     constructor(page){
         this.page = page;
 
-        this.addButton = page.getByRole('button',{name:'Add'})
+        
     }
 
     async addEmployee(){
-        await this.addButton.click();
+         await this.page
+      .getByRole(addButton.role, { name: addButton.name })
+      .click();
     }
 }
